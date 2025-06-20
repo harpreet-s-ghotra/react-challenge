@@ -1,3 +1,4 @@
+import { STRINGS } from '../strings';
 import './Filters.scss';
 
 interface FiltersProps {
@@ -13,18 +14,26 @@ interface FiltersProps {
 
 export default function Filters({ genres, selectedGenre, onGenreChange, decades, selectedDecade, onDecadeChange, sort, onSortChange }: FiltersProps) {
   return (
-    <div className="filters">
-      <select value={selectedGenre} onChange={e => onGenreChange(e.target.value)}>
-        <option value="">All Genres</option>
-        {genres.map(g => <option key={g} value={g}>{g}</option>)}
+    <div className='filters'>
+      <select value={selectedGenre} onChange={(e) => onGenreChange(e.target.value)} aria-label={STRINGS.genre}>
+        <option value=''>{STRINGS.allGenres}</option>
+        {genres.map((g) => (
+          <option key={g} value={g}>
+            {g}
+          </option>
+        ))}
       </select>
-      <select value={selectedDecade} onChange={e => onDecadeChange(e.target.value)}>
-        <option value="">All Decades</option>
-        {decades.map(d => <option key={d} value={d}>{d}</option>)}
+      <select value={selectedDecade} onChange={(e) => onDecadeChange(e.target.value)} aria-label={STRINGS.releaseYear}>
+        <option value=''>{STRINGS.allDecades}</option>
+        {decades.map((d) => (
+          <option key={d} value={d}>
+            {d}
+          </option>
+        ))}
       </select>
-      <select value={sort} onChange={e => onSortChange(e.target.value)}>
-        <option value="release_year">Release Year</option>
-        <option value="rating">Rating</option>
+      <select value={sort} onChange={(e) => onSortChange(e.target.value)} aria-label={STRINGS.sort}>
+        <option value='release_year'>{STRINGS.releaseYear}</option>
+        <option value='rating'>{STRINGS.rating}</option>
       </select>
     </div>
   );
