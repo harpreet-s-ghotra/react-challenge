@@ -1,5 +1,5 @@
 import './Loader.scss';
 
 export default function Loader() {
-  return <div className="loader" />;
+  return <div className='loader' role='status' aria-label='Loading' />;
 }

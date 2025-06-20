@@ -14,7 +14,7 @@ export default function TrackDetailsPage() {
   useEffect(() => {
     setLoading(true);
     fetch(`${API_URL}/${id}`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((data: Track) => {
         setTrack(data);
         setLoading(false);
@@ -25,15 +25,27 @@ export default function TrackDetailsPage() {
   if (!track) return <div>Track not found</div>;
 
   return (
-    <div className="track-details-page">
-      <h2>{track.name}</h2>
+    <div className='track-details-page'>
+      <h2>{track.track_name}</h2>
       <ul>
-        <li><strong>Artist:</strong> {track.artist}</li>
-        <li><strong>Album:</strong> {track.album}</li>
-        <li><strong>Genre:</strong> {track.genre}</li>
-        <li><strong>Release Year:</strong> {track.release_year}</li>
-        <li><strong>Release Date:</strong> {track.release_date}</li>
-        <li><strong>Rating:</strong> {track.rating}</li>
+        <li>
+          <strong>Artist:</strong> {track.artist}
+        </li>
+        <li>
+          <strong>Album:</strong> {track.album_name}
+        </li>
+        <li>
+          <strong>Genre:</strong> {track.genre}
+        </li>
+        <li>
+          <strong>Release Year:</strong> {track.release_year}
+        </li>
+        <li>
+          <strong>Release Date:</strong> {track.release_date}
+        </li>
+        <li>
+          <strong>Rating:</strong> {track.rating}
+        </li>
       </ul>
     </div>
   );

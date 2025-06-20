@@ -8,21 +8,33 @@ interface TrackTableProps {
 
 export default function TrackTable({ tracks, onRowClick }: TrackTableProps) {
   return (
-    <div className="track-table-wrapper">
-      <table className="track-table">
+    <div className='track-table-wrapper' role='region' aria-label='Track list'>
+      <table className='track-table'>
         <thead>
           <tr>
-            <th>Track Name</th>
-            <th>Artist</th>
-            <th>Album Name</th>
-            <th>Genre</th>
-            <th>Release Year</th>
-            <th>Rating</th>
+            <th scope='col'>Track Name</th>
+            <th scope='col'>Artist</th>
+            <th scope='col'>Album Name</th>
+            <th scope='col'>Genre</th>
+            <th scope='col'>Release Year</th>
+            <th scope='col'>Rating</th>
           </tr>
         </thead>
         <tbody>
-          {tracks.map(track => (
-            <tr key={track.id} onClick={() => onRowClick(track)}>
+          {tracks.map((track) => (
+            <tr
+              key={track.id}
+              tabIndex={0}
+              role='button'
+              aria-label={`View details for ${track.track_name} by ${track.artist}`}
+              onClick={() => onRowClick(track)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onRowClick(track);
+                }
+              }}
+            >
               <td>{track.track_name}</td>
               <td>{track.artist}</td>
               <td>{track.album_name}</td>

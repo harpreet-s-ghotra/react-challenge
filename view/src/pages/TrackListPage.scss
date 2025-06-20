@@ -7,7 +7,7 @@
 .controls {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -17,4 +17,37 @@
         flex-direction: column;
         align-items: stretch;
     }
+}
+
+.card-list {
+  display: grid;
+  gap: 1rem;
+}
+.card-list button,
+.card-list [tabindex] {
+  outline: none;
+}
+.card-list [role="button"]:focus,
+.card-list button:focus {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+.load-more {
+  min-height: 48px;
+  min-width: 160px;
+  margin: 2rem auto;
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #e0e0e0);
+  background: var(--color-card, #fff);
+  color: var(--color-foreground, #222);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.load-more:focus {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
 }
