@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# React Tracks Challenge – Developer Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Structure & Philosophy
 
-Currently, two official plugins are available:
+This project is organized to keep things simple, scalable, and easy to reason about:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **`src/pages/`**: Each file here is a top-level route/page. Pages are responsible for data fetching, state, and composing the UI. For example, `TrackListPage.tsx` handles the main list/search/filter view, and `TrackDetailsPage.tsx` is for the details route.
+- **`src/components/`**: All reusable UI pieces live here. Components are stateless and get their data/handlers via props. This makes them easy to test and reuse. Examples: `TrackTable`, `TrackCard`, `Filters`, `SearchBar`.
+- **Component SCSS**: Every component has its own `.scss` file (e.g., `TrackTable.scss`). This keeps styles local, so you never have to worry about one component's styles breaking another's.
+- **`src/styles/`**: Only global styles and Tailwind setup go here. All component-specific styles stay with their component.
 
-## Expanding the ESLint configuration
+This setup means you can drop in a new feature or refactor a component without worrying about breaking unrelated parts of the app.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How It Works
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **UI**: Built with React, Vite, TypeScript, and shadcn/ui for accessible, modern UI components. Tailwind is used for utility classes and layout.
+- **Responsiveness**: On desktop/tablet, you get a table/grid view. On mobile, it switches to a card view. This is handled by a custom `useIsMobile` hook.
+- **Accessibility**: All interactive elements are keyboard-accessible and have ARIA labels. Dialogs have proper titles and descriptions for screen readers.
+- **Infinite Scroll**: The list loads in pages. When you hit "Load More," it fetches the next chunk. This keeps things fast, even with a huge dataset.
+- **Debounced Search**: The search input uses a debounce hook, so we only hit the API after the user stops typing for a bit. This keeps the UI snappy and avoids spamming the backend.
+- **Loader Placement**: The loader only shows in the list area, so the search/filter controls are always visible.
+- **State Management**: All state is managed with React hooks.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Why This Structure?
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Scalability**: Easy to add new features or refactor without breaking things.
+- **Maintainability**: New devs can jump in and quickly find what they need.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Running the Project
+
+1. Start the backend API (see the root README).
+2. In the `view` folder:
+   ```sh
+   npm install
+   npm run dev
+   ```
+3. Open [http://localhost:5173](http://localhost:5173) (or whatever port Vite gives you).
+
+---
