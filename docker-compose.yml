@@ -1,0 +1,8 @@
+services:
+  json-server:
+    container_name: cm-challenge-json-server
+    build: server
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./server/tracks.json:/app/tracks.json:ro
