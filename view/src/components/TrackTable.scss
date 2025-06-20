@@ -1,0 +1,24 @@
+.track-table-wrapper {
+    overflow-x: auto;
+}
+
+.track-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.track-table th,
+.track-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.track-table tr {
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.track-table tr:hover {
+    background: #f5f5f5;
+}
