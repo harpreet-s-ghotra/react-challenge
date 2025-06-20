@@ -108,7 +108,7 @@ export default function TrackListPage() {
       });
   };
 
-  if (loading) return <Loader />;
+  if (loading && tracks.length === 0) return <Loader />;
 
   return (
     <div className='track-list-page'>
@@ -127,12 +127,16 @@ export default function TrackListPage() {
       </div>
       {isMobile ? (
         <div className='card-list grid gap-4'>
+          {loading && tracks.length > 0 && <Loader />}
           {tracks.map((track) => (
             <TrackCard key={track.id} track={track} onClick={setSelected} />
           ))}
         </div>
       ) : (
-        <TrackTable tracks={tracks} onRowClick={setSelected} />
+        <>
+          {loading && tracks.length > 0 && <Loader />}
+          <TrackTable tracks={tracks} onRowClick={setSelected} />
+        </>
       )}
       {hasMore && (
         <button className='load-more' onClick={loadMore} disabled={loadingMore} style={{ margin: '2rem auto', display: 'block' }}>
