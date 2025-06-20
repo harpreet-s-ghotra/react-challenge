@@ -22,5 +22,6 @@ export const STRINGS = {
     releaseYear: 'Release Year',
     releaseDate: 'Release Date',
     rating: 'Rating',
+    trackName: 'Track Name',
   },
 };

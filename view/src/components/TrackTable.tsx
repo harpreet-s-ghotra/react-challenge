@@ -1,5 +1,8 @@
 import type { Track } from '../types';
 import './TrackTable.scss';
+import { STRINGS } from '../strings';
+
+const { details } = STRINGS;
 
 interface TrackTableProps {
   tracks: Track[];
@@ -12,12 +15,12 @@ export default function TrackTable({ tracks, onRowClick }: TrackTableProps) {
       <table className='track-table'>
         <thead>
           <tr>
-            <th scope='col'>Track Name</th>
-            <th scope='col'>Artist</th>
-            <th scope='col'>Album Name</th>
-            <th scope='col'>Genre</th>
-            <th scope='col'>Release Year</th>
-            <th scope='col'>Rating</th>
+            <th scope='col'>{details.trackName}</th>
+            <th scope='col'>{details.artist}</th>
+            <th scope='col'>{details.album}</th>
+            <th scope='col'>{details.genre}</th>
+            <th scope='col'>{details.releaseYear}</th>
+            <th scope='col'>{details.rating}</th>
           </tr>
         </thead>
         <tbody>
